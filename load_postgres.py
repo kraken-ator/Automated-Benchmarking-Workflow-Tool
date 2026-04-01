@@ -2,10 +2,7 @@ import pandas as pd
 from sqlalchemy import create_engine, text
 import urllib.parse
 
-# 1. Database Connection Parameters
 db_user = 'postgres'
-# IMPORTANT: Replace 'm4ps@...' with your exact, raw password here. 
-# The quote_plus function will safely handle the '@' symbol.
 db_password = urllib.parse.quote_plus('PASSWORD') 
 db_host = 'localhost'
 db_port = '5432'
@@ -13,7 +10,6 @@ db_name = 'postgres'
 
 engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
 
-# 2. Execute the Schema and Views
 schema_sql = """
 CREATE SCHEMA IF NOT EXISTS client_ops;
 
@@ -55,7 +51,6 @@ print("Building database schema...")
 with engine.begin() as conn:
     conn.execute(text(schema_sql))
 
-# 3. Load the CSV into the Staging Table
 print("Loading 50K+ records into PostgreSQL...")
 df = pd.read_csv('hospital_operations_data.csv')
 
