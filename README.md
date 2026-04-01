@@ -12,7 +12,7 @@ An automated rapid diagnostic tool designed to benchmark **50,000+ hospital oper
 ### **Key Features**
 * **Weighted Anomaly Detection:** Engineered a synthetic dataset with weighted distributions to simulate real-world operational "leaks."
 * **SQL Transformation Layer:** Developed a PostgreSQL view to calculate "Value at Stake" across ER wait times, Bed Turnover, and Procurement.
-* **Automated Insights:** Integrated Gemini 1.5 Flash to synthesize complex metrics into boardroom-ready summaries.
+* **Automated Insights:** Integrated Gemini 2.5 Flash to synthesize complex metrics into boardroom-ready summaries.
 
 ### **How to Run**
 1. Clone the repo.
