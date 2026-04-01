@@ -6,10 +6,8 @@ import plotly.express as px
 from google import genai
 from google.genai import types
 
-# --- 1. Configuration & Credentials ---
 st.set_page_config(page_title="Clinical Ops Diagnostic", layout="wide")
 
-# ---> DROP YOUR GEMINI API KEY HERE <---
 GEMINI_API_KEY = "API KEY"
 
 @st.cache_resource
@@ -23,7 +21,6 @@ def init_db_connection():
 
 engine = init_db_connection()
 
-# --- 2. Data Extraction ---
 @st.cache_data
 def load_diagnostic_data():
     query = """
@@ -44,11 +41,9 @@ def load_diagnostic_data():
 
 df = load_diagnostic_data()
 
-# --- 3. Dashboard Header & KPIs ---
 st.title("🏥 Rapid Diagnostic Asset: Operational Value at Stake")
 st.markdown("---")
 
-# Calculate totals for the top KPI row
 total_value_at_stake = df['total_leakage'].sum()
 total_er = df['er_leakage'].sum()
 total_bed = df['bed_leakage'].sum()
@@ -62,10 +57,8 @@ col4.metric("Procurement Variance", f"${total_proc:,.0f}")
 
 st.markdown("---")
 
-# --- 4. Interactive Visualizations ---
 st.subheader("Leakage Breakdown by Facility & Department")
 
-# Plotly Bar Chart
 fig = px.bar(
     df, 
     x="facility", 
@@ -77,7 +70,6 @@ fig = px.bar(
 )
 st.plotly_chart(fig, use_container_width=True)
 
-# --- 5. GenAI Executive Summary Integration ---
 st.markdown("---")
 st.subheader("🧠 GenAI Diagnostic Summary")
 
@@ -86,7 +78,7 @@ if st.button("Generate Executive Insights"):
         try:
             client = genai.Client(api_key=GEMINI_API_KEY)
             
-            # Get top 5 offenders for the prompt
+            
             top_5_data = df.head(5).to_string(index=False)
             
             system_instruction = """
