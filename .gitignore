@@ -1,0 +1,11 @@
+# Credentials
+.env
+__pycache__/
+*.pyc
+
+# Data (Too large for GitHub)
+hospital_operations_data.csv
+
+# Local environment
+venv/
+.streamlit/
